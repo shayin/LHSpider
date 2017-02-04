@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import sys
 import logging
 import threading
+from pymongo import MongoClient
 
 class LhSaver(object):
-    def __init__(self, saver=sys.stdout):
-        self._saver = saver
+    def __init__(self, db_name, collection_name):
         self._lock = threading.Lock()
+        client = MongoClient("127.0.0.1", 27037)
+        self.db = client[db_name][collection_name]
 
     def save_work(self, url, item):
         logging.info("%s saver: url=%s", self.__class__.__name__, url)
@@ -24,11 +25,9 @@ class LhSaver(object):
         return result
 
     def save_item(self, item):
-        encode_type = sys.getfilesystemencoding()
-        logging.error(encode_type)
-        logging.error(item)
-        title = item["title"].decode('utf-8').encode(encode_type)
-        logging.error("title: " + title + "\n")
-        self._saver.write(title)
-        self._saver.flush()
+        # encode_type = sys.getfilesystemencoding()
+        # logging.error(encode_type)
+        # logging.error(item)
+        # title = item["title"].decode('utf-8').encode(encode_type)
+        self.db.insert(item)
         return True

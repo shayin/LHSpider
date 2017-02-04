@@ -47,6 +47,7 @@ class LhParser(object):
                 title = ""
             save_lists = {
                 "title": title,
+                "content": text,
                 "url": url,
             }
         else:

@@ -8,7 +8,7 @@ class DoubanCrawler(Spider.LhCrawler):
     def __init__(self):
         fetcher = Spider.LhFetcher(6, 1)
         parser = DoubanParser(6)
-        saver = Spider.LhSaver()
+        saver = Spider.LhSaver("common_spider", "test_spider")
         Spider.LhCrawler.__init__(self, fetcher, parser, saver, url_filter=None)
         self.perpage = 25.0
 
