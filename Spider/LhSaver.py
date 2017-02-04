@@ -24,10 +24,11 @@ class LhSaver(object):
         return result
 
     def save_item(self, item):
-        if not item.title:
-            title = ""
-        else:
-            title = item.title
-        self._saver.write("title: " + title + "\n")
+        encode_type = sys.getfilesystemencoding()
+        logging.error(encode_type)
+        logging.error(item)
+        title = item["title"].decode('utf-8').encode(encode_type)
+        logging.error("title: " + title + "\n")
+        self._saver.write(title)
         self._saver.flush()
         return True

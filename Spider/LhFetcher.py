@@ -25,10 +25,10 @@ class LhFetcher(object):
         except Exception as err:
             if repeate >= self.max_repeate_time:
                 result, status_code, text = -1, None, None
-                logging.warning("%s fetcher[repeate=%s, url=%s] error: has try more than max allowed time %s", self.__class__.__name__, repeate, url, err)
+                logging.warning("%s fetcher[repeate=%s, url=%s] error: has try more than max allowed time ------ %s", self.__class__.__name__, repeate, url, err)
             else:
                 result, status_code, text = 0, None, None
-                logging.error("%s fetcher[repeate=%s, url=%s] error: will try again %s", self.__class__.__name__, repeate, url, err)
+                logging.error("%s fetcher[repeate=%s, url=%s] error: will try again ------ %s", self.__class__.__name__, repeate, url, err)
         else:
             logging.info("%s fetcher[repeate=%s]: success url=%s", self.__class__.__name__, repeate, url)
 

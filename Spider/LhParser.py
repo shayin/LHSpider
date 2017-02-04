@@ -41,7 +41,10 @@ class LhParser(object):
                             url_lists.append(url_analyse.scheme + "://" + url_analyse.netloc + "/" + a_tag.attrs['href'])
                         except Exception as error:
                             logging.error("%s parser url error: %s", self.__class__.__name__, error)
-            title = soup.title.content
+            if soup.title:
+                title = soup.title.string
+            else:
+                title = ""
             save_lists = {
                 "title": title,
                 "url": url,

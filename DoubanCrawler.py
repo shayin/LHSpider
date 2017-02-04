@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import LHSpider
+import Spider
 from DoubanParser import DoubanParser
 
 
-class DoubanCrawler(LHSpider.LhCrawler):
+class DoubanCrawler(Spider.LhCrawler):
     def __init__(self):
-        fetcher = LHSpider.LhFetcher(6, 1)
-        parser = DoubanParser()
-        saver = LHSpider.LhSaver()
-        LHSpider.LhCrawler.__init__(self, fetcher, parser, saver, url_filter=None)
+        fetcher = Spider.LhFetcher(6, 1)
+        parser = DoubanParser(6)
+        saver = Spider.LhSaver()
+        Spider.LhCrawler.__init__(self, fetcher, parser, saver, url_filter=None)
         self.perpage = 25.0
 
     def __get_topic_pages(self, topic_lists):

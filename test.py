@@ -11,7 +11,7 @@ class DouBan(object):
 
     def start(self):
         self.crawler.set_seed_url("http://cuiqingcai.com/1319.html", 0)
-        self.crawler.start(3)
+        self.crawler.start(fetcher_num=3)
 
 
 if __name__ == "__main__":
