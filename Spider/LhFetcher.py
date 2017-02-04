@@ -8,11 +8,12 @@ from Config import CONFIG_USER_AGENT_PC, CONFIG_USER_AGENT_PHONE
 
 
 class LhFetcher(object):
-    def __init__(self, max_repeate_time=6, sleep_time=0):
+    def __init__(self, max_repeate_time=6, sleep_time=0, verify=False):
         self.requests = requests.session()
         self.requests.adapters.DEFAULT_RETRIES = 0
         self.max_repeate_time = max_repeate_time
         self.sleep_time = sleep_time
+        self.verify = verify
 
     def fetch_work(self, url, deep, repeate):
         logging.info("%s fetcher[repeate=%s]: url=%s", self.__class__.__name__, repeate, url)
@@ -39,7 +40,7 @@ class LhFetcher(object):
             "User-Agent": self._get_random_user_agent(ua_type),
             "Accept-Encoding": "gzip",
         }
-        res = requests.get(url, headers=header, timeout=(3, 10))
+        res = requests.get(url, headers=header, timeout=(3, 10), verify=self.verify)
         return 1, res.status_code, res.text
 
     @staticmethod

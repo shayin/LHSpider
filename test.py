@@ -10,7 +10,7 @@ class DouBan(object):
         self.crawler = DoubanCrawler()
 
     def start(self):
-        self.crawler.set_seed_url("http://cuiqingcai.com/1319.html", 0)
+        self.crawler.set_seed_url("http://cuiqingcai.com/1319.html", deep=0)
         self.crawler.start(fetcher_num=3)
 
 

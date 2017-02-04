@@ -7,7 +7,7 @@ from pymongo import MongoClient
 class LhSaver(object):
     def __init__(self, db_name, collection_name):
         self._lock = threading.Lock()
-        client = MongoClient("127.0.0.1", 27037)
+        client = MongoClient("127.0.0.1", 27017)
         self.db = client[db_name][collection_name]
 
     def save_work(self, url, item):
