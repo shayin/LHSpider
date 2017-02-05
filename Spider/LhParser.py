@@ -38,7 +38,11 @@ class LhParser(object):
                     else:
                         try:
                             url_analyse = urlparse(url)
-                            url_lists.append(url_analyse.scheme + "://" + url_analyse.netloc + "/" + a_tag.attrs['href'])
+                            if re.match(r'^//.+$', a_tag.attrs['href']):
+                                url_lists.append(url_analyse.scheme + ":" + a_tag.attrs['href'])
+                            else:
+                                url_lists.append(url_analyse.scheme + "://" + url_analyse.netloc + "/" + a_tag.attrs['href'])
+
                         except Exception as error:
                             logging.error("%s parser url error: %s", self.__class__.__name__, error)
             if soup.title:
@@ -47,7 +51,7 @@ class LhParser(object):
                 title = ""
             save_lists = {
                 "title": title,
-                "content": text,
+                # "content": text,
                 "url": url,
             }
         else:
